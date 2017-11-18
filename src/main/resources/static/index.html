@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<title>TeamcoreTV</title>
+		<link rel="stylesheet" href="font-awesome.min.css">
+		<link rel="stylesheet" href="jquery-ui.min.css" />
+		<link rel="stylesheet" href="styles.css" />
+		<script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="jquery-ui.min.js"></script>
+		<script type="text/javascript" src="mode.js?build=0.1.5"></script>
+		<script type="text/javascript" src="cell.js?build=0.1.5"></script>
+		<script type="text/javascript" src="canvas.js?build=0.1.5"></script>
+		<script type="text/javascript" src="app.js?build=0.1.5"></script>
+		<!-- <script type="text/javascript" src="boxes.js?build=0.1.5"></script>  --> 
+	</head>
+	<body>
+		<div class="loader">
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+		</div>
+		<div id="wrapper">
+			<div class="player-container" style="display: none;">
+				<div id="overlay1"></div>
+				<div id="player-controls">
+					<div class="next-frame-loader"></div>
+					<div><span id="player1-title"></span><span class="logo">TeamcoreTV</span></div>
+					<div id="player1"></div>
+					<div id="controls">
+						<i id="step-backward" title="Previous Frame (Left Arrow)" class="fa fa-step-backward" aria-hidden="true"></i>
+						<i id="play" title="Play" class="fa fa-play" aria-hidden="true"></i>
+						<i id="pause" title="Pause" class="fa fa-pause" aria-hidden="true" style="display: none;"></i>
+						<i id="stop" title="Stop" class="fa fa-stop" aria-hidden="true"></i>
+						<i id="step-forward" title="Next Frame (Right Arrow)" class="fa fa-step-forward" aria-hidden="true"></i>
+						<i id="undo" title="Undo" class="fa fa-undo" aria-hidden="true"></i>
+						<i id="reset" title="Reset" class="fa fa-trash" aria-hidden="true"></i>
+						<i id="submit" title="Submit" class="fa fa-check" aria-hidden="true"></i>
+						<i id="copy-toggle" title="Copy Bounding Boxes" class="fa fa-copy" aria-hidden="true"></i>
+						<div class="bbox-buffer-wrapper"><input id="bbox-buffer" title="Bounding Box Buffer Range" type="range" min="5" max="50" list=bbox-buffer-list/></div>
+						<i id="label-toggle" title="Hide Labels" class="fa fa-eye-slash" aria-hidden="true"></i> 
+						<i id="help" title="Help" class="fa fa-question-circle" aria-hidden="true"></i>
+					</div>
+					<span class="progress">0 %</span>
+				</div>
+			</div>
+		</div>
+		<div id="help-content" style="display: none;"></div>
+		<div id="help-content-body" style="display: none;">
+			<span class="title">Help</span>
+			<i class="close-btn fa fa-times-circle" aria-hidden="true" style="float: right; margin-right: 10px; margin-top: -28px;"></i>
+			<div class="help-text">
+				You can create multiple cells, and also <b>drag</b> them around if necessary.<br/>
+				You can drag multiple cells at once by first selecting them while holding the <b>ctrl</b> key.<br/>
+				Clicking on a cell while holding the <b>ctrl</b> key will also toggle selection.<br/>
+				Clicking anywhere else on the app will deselect the selected group of cells.<br/>
+				<br/>
+				To move to the next/previous frames, you can use the <i title="Next Frame (Right Arrow)" class="fa fa-step-forward" aria-hidden="true"></i> and
+				<i title="Previous Frame (Left Arrow)" class="fa fa-step-backward" aria-hidden="true"></i> icons, or use the arrow keys on your keyboard.
+				Hitting <i title="Play" class="fa fa-play" aria-hidden="true"></i> plays the video at the speed of 1 frame per second (FPS), which you could
+				pause using the <i title="Pause" class="fa fa-pause" aria-hidden="true"></i> icon. If you need to go to the very beginning,
+				hit <i title="Stop" class="fa fa-stop" aria-hidden="true"></i>. You could undo the recently created cells on a frame by hitting
+				<i title="Stop" class="fa fa-undo" aria-hidden="true"></i>. You can refer to the percentage displayed at the bottom left corner of the player
+				to see the progress of the video. When you move to the next frame, after highlighting a cell, the cell is automatically copied to the next frame;
+				this happens only when you visit a frame for the first time. Once you're satisfied with your labeling, please hit
+				<i title="Submit" class="fa fa-check" aria-hidden="true"></i>. You could complete a single video in multiple sittings i.e. the app would allow you
+				to continue labeling from the time you left off previously. At any moment, if you wish to discard your progress, please hit
+				<i id="reset" title="Reset" class="fa fa-trash" aria-hidden="true"></i>. You can prevent the system from predicting corresponding bounding boxes in 
+				the next frame and instead just copy the bounding boxes from the previous frame by clicking on the 
+				<i title="Copy Bounding Boxes" class="fa fa-copy" aria-hidden="true"></i> button. When moving the bounding box to the next frame, we add several pixels to each of the 4 sides of the previous frame's bounding box for searching. You can change the number of pixels added around the bounding box which will be used to predict the bounding box in the next frame by adjusting the range from the <b>Bounding Box Buffer Range</b> selector. The farther to the right the slider is, the larger the search area. This may help if there is a lot of camera motion, but it may also slow down the search. You may want to have a smaller search area if there are multiple animals/humans next to one another to ensure it does not track the wrong object, or if you have a large bounding box to begin with. It will not track the object if it is not within the search area. You can show/hide labels by clicking on the <i title="Hide Labels" class="fa fa-eye-slash" aria-hidden="true"></i> button.
+			</div>
+		</div>
+		<datalist id="bbox-buffer-list">
+			<option>1</option>
+			<option>5</option>
+			<option>10</option>
+			<option>15</option>
+			<option>20</option>
+			<option>25</option>
+			<option>30</option>
+			<option>35</option>
+			<option>40</option>
+			<option>45</option>
+			<option>50</option>
+		</datalist>
+</body>
+</html>

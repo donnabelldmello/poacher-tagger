@@ -1,0 +1,53 @@
+security:
+  users:
+    - name: teamcore
+      password: SAL300
+    - name: admin
+      password: TITAN300
+
+tagging:
+  box-area-threshold: 20
+  box-pixel-threshold: 200
+  box-area-max-size: 50
+  videos-dir: /Users/donna/Documents/workspace/tagger/src/main/resources/static/input/
+  output-dir: /Users/donna/Documents/workspace/tagger/output/
+  options:
+    - name: Label
+      mode: label
+      output-file: output.csv
+    - name: Review
+      mode: review
+      input-file: output.csv
+      output-file: review.csv
+    - name: Final Review
+      mode: review
+      input-file: review.csv
+      output-file: final-review.csv
+  user-options:
+    - name: teamcore
+      options:
+        - Label
+        - Review
+    - name: admin
+      options:
+        - Label
+        - Review
+        - Final Review
+  labels:
+    - name: poacher
+      color: "#0072B2"
+      color-text: blue
+    - name: animal
+      color: "#B32F57"
+      color-text: pink
+#    - name: animal
+#      color: "#F0E442"
+#      color-text: yellow
+#    - name: vegetation
+#      color: "#B32F57"
+#      color-text: pink
+  videos:
+    - directory: "0000000009_0000000000"
+      num-frames: 130
+    - directory: "0000000067_0000000017"
+      num-frames: 975
